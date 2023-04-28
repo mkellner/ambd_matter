@@ -69,6 +69,7 @@ typedef enum
     GAP_PARAM_ADV_FILTER_POLICY    = 0x267,//!< Filter Policy. Ignored when directed advertising is used. Read/Write. Size is uint8. Default is GAP_ADV_FILTER_ANY (@ref T_GAP_ADV_FILTER_POLICY).
     GAP_PARAM_ADV_INTERVAL_MIN     = 0x268,//!< Minimum advertising interval for undirected and low duty cycle directed advertising. Value range: 0x0020 - 0x4000 (20ms - 10240ms 0.625ms/step),Read/Write Size is uint16_t.
     GAP_PARAM_ADV_INTERVAL_MAX     = 0x269,//!< Maximum advertising interval for undirected and low duty cycle directed  advertising. Value range: 0x0020 - 0x4000 (20ms - 10240ms 0.625ms/step)),Read/Write Size is uint16_t.
+    GAP_PARAM_ADV_EMBIGGEN = 0xFFFFFFFF
 } T_LE_ADV_PARAM_TYPE;
 
 /** End of GAP_Broadcaster_Exported_Types

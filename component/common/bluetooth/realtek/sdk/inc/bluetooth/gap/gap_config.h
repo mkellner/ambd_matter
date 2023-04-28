@@ -54,6 +54,7 @@ typedef enum
 {
     CONFIG_GATT_CCCD_CHECK,         /**< Check cccd when server sends notification or indication. */
     CONFIG_GATT_CCCD_NOT_CHECK,     /**< Not check cccd when server sends notification or indication. */
+    CONFIG_GATT_CCCD_EMBIGGEN = 0xFFFFFFFFFF
 } T_GAP_CONFIG_GATT_CCCD_NOT_CHECK;
 #endif
 /** End of GAP_LE_CONFIG_Exported_Types

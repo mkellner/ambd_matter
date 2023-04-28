@@ -12,6 +12,18 @@ void app_ftl_init(void)
 	ftl_init(ftl_phy_page_start_addr, ftl_phy_page_num);
 }
 #endif
+// USE_PSRAM is in "platform_opts.h"
+// used to enable psram in rtl8721dhp_intfcfg.c, set up psram below, and
+// in xsHost.c to redefine the allocator.
+
+#if USE_PSRAM
+typedef struct _SAL_PSRAM_MNGT_ADPT_ {
+	PCTL_InitTypeDef	PCTL_InitStruct;
+	PCTL_TypeDef		*PSRAMx;
+} SAL_PSRAM_MNGT_ADPT, *PSAL_PSRAM_MNGT_ADPT;
+SAL_PSRAM_MNGT_ADPT	PSRAMTestMngtAdpt[1];
+#endif
+
 
 #if defined(CONFIG_WIFI_NORMAL) && defined(CONFIG_NETWORK)
 extern VOID wlan_network(VOID);
@@ -36,6 +48,47 @@ void app_init_debug(void)
 	LOG_MASK(LEVEL_INFO, debug[LEVEL_INFO]);
 	LOG_MASK(LEVEL_TRACE, debug[LEVEL_TRACE]);
 }
+
+#if USE_PSRAM
+void PSRAMISRHandle(void *data)
+{
+	u32 intr_status_cal_fail = 0;
+	u32 intr_status_timeout = 0;
+
+	intr_status_cal_fail = (PSRAM_PHY_REG_Read(0x0) & BIT16) >> 16;
+	PSRAM_PHY_REG_Write(0x0, PSRAM_PHY_REG_Read(0x0));
+	intr_status_timeout = (PSRAM_PHY_REG_Read(0x1c) & BIT31) >> 31;
+	PSRAM_PHY_REG_Write(0x1c, PSRAM_PHY_REG_Read(0x1c));
+	DBG_8195A("cal_fail = %x timeout = %x\n", intr_status_cal_fail, intr_status_timeout);
+}
+
+void PSRAMInit(void)
+{
+	u32 temp;
+	PSAL_PSRAM_MNGT_ADPT pSalPSRAMMngtAdpt = NULL;
+	pSalPSRAMMngtAdpt = &PSRAMTestMngtAdpt[0];
+	InterruptRegister((IRQ_FUN)PSRAMISRHandle, PSRAMC_IRQ, (u32)pSalPSRAMMngtAdpt, 3);
+	InterruptEn(PSRAMC_IRQ, 3);
+
+	/* set rwds pull down */
+	temp = HAL_READ32(PINMUX_REG_BASE, 0x104);
+	temp &= ~(PAD_BIT_PULL_UP_RESISTOR_EN | PAD_BIT_PULL_DOWN_RESISTOR_EN);
+	temp |= PAD_BIT_PULL_DOWN_RESISTOR_EN;
+	HAL_WRITE32(PINMUX_REG_BASE, 0x104, temp);
+
+	PSRAM_CTRL_StructInit(&pSalPSRAMMngtAdpt->PCTL_InitStruct);
+	PSRAM_CTRL_Init(&pSalPSRAMMngtAdpt->PCTL_InitStruct);
+
+	PSRAM_PHY_REG_Write(0x0, (PSRAM_PHY_REG_Read(0x0) & (~0x1)));
+
+	/* set N/J initial value HW calibration */
+	PSRAM_PHY_REG_Write(0x4, 0x2030316);
+
+	/* start HW calibration */
+	PSRAM_PHY_REG_Write(0x0, 0x111);
+}
+#endif
+
 
 static void* app_mbedtls_calloc_func(size_t nelements, size_t elementSize)
 {
@@ -149,6 +202,7 @@ int main(void)
 #endif
 	//app_init_debug();
 
+#if 0
 	/* init console */
 	shell_recv_all_data_onetime = 1;
 	shell_init_rom(0, 0);	
@@ -158,6 +212,7 @@ int main(void)
 	/* Register Log Uart Callback function */
 	InterruptRegister((IRQ_FUN) shell_uart_irq_rom, UART_LOG_IRQ, (u32)NULL, 5);
 	InterruptEn(UART_LOG_IRQ,5);
+#endif
 
 	if(TRUE == SOCPS_DsleepWakeStatusGet()) {
 		app_dslp_wake();
@@ -165,6 +220,10 @@ int main(void)
 
 #ifdef CONFIG_FTL_ENABLED
 	app_ftl_init();
+#endif
+
+#if USE_PSRAM
+	PSRAMInit();
 #endif
 
 #if defined(CONFIG_WIFI_NORMAL) && defined(CONFIG_NETWORK)
@@ -195,6 +254,8 @@ int main(void)
 	//	app_hp_jack_init(); 
 	
 	app_init_debug();
+
+	xs_start();
 
 	//DBG_8195A("M4U:%d \n", RTIM_GetCount(TIMM05));
 	/* Enable Schedule, Start Kernel */

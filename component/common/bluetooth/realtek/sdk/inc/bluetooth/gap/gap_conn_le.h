@@ -50,6 +50,7 @@ typedef enum
     GAP_CONN_PARAM_2M = 1,
     GAP_CONN_PARAM_CODED = 2,
 #endif
+    GAP_CONN_PARAM_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_CONN_PARAM_TYPE;
 #endif
 
@@ -58,7 +59,8 @@ typedef enum
 {
     GAP_LINK_ROLE_UNDEFINED,    //!< Unknown.
     GAP_LINK_ROLE_MASTER,       //!< Role is master.
-    GAP_LINK_ROLE_SLAVE         //!< Role is slave.
+    GAP_LINK_ROLE_SLAVE,         //!< Role is slave.
+    GAP_LINK_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_ROLE;
 
 /** @brief LE connection parameter types */
@@ -81,7 +83,8 @@ typedef enum
 #if F_BT_LE_5_0_CSA2_SUPPORT
     GAP_PARAM_CONN_CHANN_ALGORITHM = 0x27a,//!< LE Channel Selection Algorithm used.  Read only.
 #endif
-    GAP_PARAM_CONN_HANDLE          = 0x27b,//!< LE link connection handle. Read only.
+    GAP_PARAM_CONN_HANDLE          = 0x27b,//!< LE link connection handle. Read only.,
+    GAP_PARAM_CONN_EMBIGGEN = 0xFFFFFFFF
 } T_LE_CONN_PARAM_TYPE;
 
 /** @brief  Connected device information.*/

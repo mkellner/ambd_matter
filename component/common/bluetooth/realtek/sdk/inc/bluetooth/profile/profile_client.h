@@ -71,7 +71,8 @@ typedef enum
     DISC_STATE_CHAR_UUID128_DONE,
     DISC_STATE_CHAR_DESCRIPTOR,
     DISC_STATE_CHAR_DESCRIPTOR_DONE,
-    DISC_STATE_FAILED
+    DISC_STATE_FAILED,
+    EMBIGGEN = 0xFFFFFFFF
 } T_DISCOVERY_STATE;
 
 /** @brief  Discovery result type*/
@@ -88,6 +89,7 @@ typedef enum
     DISC_RESULT_RELATION_UUID128,
     DISC_RESULT_BY_UUID16_CHAR,
     DISC_RESULT_BY_UUID128_CHAR,
+    EMBIGGEN2 = 0xFFFFFFFF
 } T_DISCOVERY_RESULT_TYPE;
 
 /** @brief  GATT write type*/
@@ -95,7 +97,8 @@ typedef enum
 {
     GATT_WRITE_TYPE_REQ = 0x01,    /**<  ATT "Write Request"  */
     GATT_WRITE_TYPE_CMD = 0x02,           /**<  ATT "Write Command"  */
-    GATT_WRITE_TYPE_SIGNED_CMD = 0x04     /**<  ATT "Signed Write Command"  */
+    GATT_WRITE_TYPE_SIGNED_CMD = 0x04,     /**<  ATT "Signed Write Command"  */
+    GATT_WRITE_TYPE_EMBIGGEN = 0xFFFFFFFF
 } T_GATT_WRITE_TYPE;
 
 typedef struct
@@ -216,7 +219,8 @@ typedef struct
 typedef enum
 {
     CLIENT_APP_CB_TYPE_DISC_STATE,
-    CLIENT_APP_CB_TYPE_DISC_RESULT
+    CLIENT_APP_CB_TYPE_DISC_RESULT,
+    CLIENT_APP_CB_TYPE_DISC_EMBIGGEN = 0xFFFFFFFF
 } T_CLIENT_CB_TYPE;
 
 /** @brief  The callback data of T_CLIENT_APP_CB_DATA.

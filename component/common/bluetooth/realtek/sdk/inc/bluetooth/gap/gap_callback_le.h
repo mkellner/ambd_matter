@@ -217,6 +217,7 @@ typedef enum
     LE_BOND_CLEAR,
     LE_BOND_FULL,
     LE_BOND_KEY_MISSING,
+    LE_BOND_EMBIGGEN = 0xFFFFFFFF
 } T_LE_BOND_MODIFY_TYPE;
 
 /** @brief  Structure for modify bonding information.*/
@@ -253,8 +254,8 @@ typedef struct
 typedef struct
 {
     uint8_t                bd_addr[6];/**< Bluetooth address of remote device. */
-    T_GAP_REMOTE_ADDR_TYPE remote_addr_type;/**< Address type of remote device. */
-    T_GAP_ADV_EVT_TYPE     adv_type;/**< Advertising event type. */
+    T_GAP_REMOTE_ADDR_TYPE remote_addr_type; /**< Address type of remote device. */
+    T_GAP_ADV_EVT_TYPE adv_type;             /**< Advertising event type. */
     int8_t                 rssi;   /**< RSSI. */
     uint8_t                data_len;
     uint8_t                data[31];

@@ -8,96 +8,64 @@ SECTIONS
 	.rom.rodata : { } > DROM
 	.hal.rom.bss : { } > ROMBSS_RAM
 
+	/* image1 entry, this section should in RAM and fixed address for ROM */
+	.ram_image1.entry :
+	{
+		__ram_image1_text_start__ = .;
+		__ram_start_table_start__ = .;
+		KEEP(*(SORT(.image1.entry.data*)))
+		KEEP(*(.image1.validate.rodata*))
+		KEEP(*(.image1.rodata*))
+	} > BOOTLOADER_RAM
+
+	/*  Add . to assign the start address of the section */ 
+	/*  to prevent the change of the start address by ld doing section alignment */  
+	.ram_image1.text . :
+	{
+		/* image1 text */
+		*(.boot.ram.text*)    
+		*(.boot.rodata*)
+	} > BOOTLOADER_RAM
+
+	.ram_image1.data . :
+	{
+		__ram_image1_data_start__ = .;
+		KEEP(*(.boot.ram.data*))
+		__ram_image1_data_end__ = .;
+	
+		__ram_image1_text_end__ = .;
+	} > BOOTLOADER_RAM
+
+	.ram_image1.bss . :
+	{
+		__image1_bss_start__ = .;
+		KEEP(*(.boot.ram.bss*))
+		KEEP(*(.boot.ram.end.bss*))
+		*(.bss*)
+		__image1_bss_end__ = .;
+	} > BOOTLOADER_RAM
+
+	.xip_image1.text :
+	{
+		__flash_boot_text_start__ = .;
+
+		*(.flashboot.text*)
+		*(.text*)
+
+		__flash_boot_text_end__ = .;
+
+		. = ALIGN(16);
+	} > KM0_BOOT
+
 	.ram_image2.entry :
 	{
 		__ram_image2_text_start__ = .;
 		__image2_entry_func__ = .;
-		KEEP(*(SORT(.image2.entry.data*)))
-
-		__image2_validate_code__ = .;
-		KEEP(*(.image2.validate.rodata*)) 
 
 	} > BD_RAM
 
-	.ram_image2.text :
-	{
-		*(.image2.ram.text*)
-	} > BD_RAM
-
-	.ram_image2.data : 
-	{
-		__data_start__ = .;
-		*(.data*)
-		__data_end__ = .;
-		__ram_image2_text_end__ = .;
-		. = ALIGN(16);	
-	} > BD_RAM
-  
-	.ram_image2.bss :
-	{
-		__bss_start__ = .;
-		*(.bss*)
-		*(COMMON)
-		*(.FW.ram.bss*)
-		__bss_end__ = .;
-	} > BD_RAM
-
-	.ram_image2.nocache.data :
-	{
-		. = ALIGN (32);
-		__ram_nocache_start__ = .;
-		*(.bdsram.data*)
-		. = ALIGN (32);
-		__ram_nocache_end__ = .;
-	} > BD_RAM
-
-	.ram_heap.data : 
-	{
-		*(.bfsram.data*)
-		*(.heap.stdlib*)
-	
-	} > BD_RAM
-
-	.heap (COPY):
-	{
-		__HeapBase = .;
-		__end__ = .;
-		end = __end__;
-		KEEP(*(.heap*))
-		__HeapLimit = .;
-	} > BD_RAM
-
-	.xip_image2.text : 
-	{
-		__flash_text_start__ = .;
-
-		*(.img2_custom_signature*)
-
-		*(.text*)    
-		*(.rodata*)
-
-		. = ALIGN (4);
-		__cmd_table_start__ = .;
-		KEEP(*(.cmd.table.data*))
-		__cmd_table_end__ = .;
-
-		__flash_text_end__ = .;
-	
-		. = ALIGN (16);
-	} > KM0_IMG2
-
-	.ram_retention.entry : 
-	{
-		__retention_entry_func__ = .;
-		KEEP(*(SORT(.retention.entry.data*)))
-	} > RETENTION_RAM
-
-	.ram_retention.text : 
-	{
-		__retention_text_start__ = .;
-		KEEP(*(.retention.ram.text*))
-		KEEP(*(.retention.ram.data*))
-	} > RETENTION_RAM
+	__ls_flash_text_start__ = ORIGIN(KM0_IMG2);
+	__hs_flash_text_start__ = ORIGIN(KM4_IMG2);
 }
 SECTIONS
 {

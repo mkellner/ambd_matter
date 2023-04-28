@@ -119,6 +119,7 @@ typedef enum
     GAP_IO_CAP_KEYBOARD_ONLY,       //!<  Only a Keyboard present, no Display.
     GAP_IO_CAP_NO_INPUT_NO_OUTPUT,  //!<  No input/output capabilities.
     GAP_IO_CAP_KEYBOARD_DISPLAY,    //!<  Keyboard and Display present.
+    GAP_IO_CAP_EMBIGGEN=0xffffffff
 } T_GAP_IO_CAP;
 
 /** @brief Key types */
@@ -130,7 +131,8 @@ typedef enum
     GAP_KEY_LE_REMOTE_IRK         = 0x14, /**< BLE Identity Resolving Key. */
     GAP_KEY_LE_LOCAL_CSRK         = 0x15, /**< BLE Local CSR Key. */
     GAP_KEY_LE_REMOTE_CSRK        = 0x16, /**< BLE Remote CSR Key. */
-    GAP_KEY_DELETE                = 0xFF  /**< Link key is no longer valid and should be deleted. */
+    GAP_KEY_DELETE                = 0xFF,  /**< Link key is no longer valid and should be deleted. */
+    GAP_KEY_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_KEY_TYPE;
 
 /** @brief GAP Remote Address Type */
@@ -142,6 +144,7 @@ typedef enum
     GAP_REMOTE_ADDR_LE_PUBLIC_IDENTITY = 0x02, /**< LE Public identity address type. */
     GAP_REMOTE_ADDR_LE_RANDOM_IDENTITY = 0x03, /**< LE Random identity address type. */
 #endif
+    GAP_REMOTE_ADDR_EMBIGGEN           = 0xFFFFFFFF,
 } T_GAP_REMOTE_ADDR_TYPE;
 
 /** @brief GAP Cause List */
@@ -161,6 +164,7 @@ typedef enum
     GAP_CAUSE_CONN_LIMIT        = 0x0b,//!< Connection reachs limited count.
     GAP_CAUSE_NO_BOND           = 0x0c,//!< No Bond.
     GAP_CAUSE_ERROR_UNKNOWN     = 0xFF,//!< Unknown error.
+    GAP_CAUSE_EMBIGGEN          = 0xFFFFFFFF
 } T_GAP_CAUSE;
 
 /** @brief  GAP Confirmation Cause List */
@@ -168,6 +172,7 @@ typedef enum
 {
     GAP_CFM_CAUSE_ACCEPT = (GAP_ERR | GAP_ACCEPT),    /**< Accept for indication, only used when confirmation. */
     GAP_CFM_CAUSE_REJECT = (GAP_ERR | GAP_ERR_REJECT),/**< Reject for indication, only used when confirmation. */
+    GAP_CFM_CAUSE_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_CFM_CAUSE;
 
 /** @brief  APP Return Result List */
@@ -189,6 +194,7 @@ typedef enum
     APP_RESULT_APP_ERR                    = (ATT_ERR | ATT_ERR_MIN_APPLIC_CODE),
     APP_RESULT_CCCD_IMPROPERLY_CONFIGURED = (ATT_ERR | ATT_ERR_CCCD_IMPROPERLY_CONFIGURED),
     APP_RESULT_PROC_ALREADY_IN_PROGRESS   = (ATT_ERR | ATT_ERR_PROC_ALREADY_IN_PROGRESS),
+    APP_RESULT_EMBIGGEN = 0xffffffff
 } T_APP_RESULT;
 
 /** @brief GAP Parameter List */
@@ -202,6 +208,7 @@ typedef enum
     GAP_PARAM_BOND_OOB_ENABLED               = 0x205,//!< OOB data available for pairing algorithm. Read/Write. Size is uint8_t. Default is 0(disabled).
 #endif
     GAP_PARAM_BOND_LE_PAIRING_MODE           = 0x207,//!< LE Pairing Mode. Read/Write. Size is uint8_t. Default is GAP_PAIRING_MODE_PAIRABLE (@ref BOND_PAIRING_MODE_DEFINES).
+    GAP_PARAM_BOND_EMBIGGEN = 0xffffffff
 } T_GAP_PARAM_TYPE;
 
 

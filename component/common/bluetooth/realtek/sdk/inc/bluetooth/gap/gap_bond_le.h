@@ -58,6 +58,7 @@ typedef enum
 #endif
     GAP_PARAM_BOND_KEY_MANAGER          = 0x218,//!< Key manager. Write only. size is uint8_t. Default is 0(disabled).
     GAP_PARAM_BOND_SIGN_KEY_FLAG        = 0x219,//!< Sign key flag configure. Write only. size is uint8_t. Default is 0(disabled).
+    GAP_PARAM_BOND_THING_EMBIGGEN = 0xFFFFFFFF
 } T_LE_BOND_PARAM_TYPE;
 
 /** End of GAP_LE_BOND_MANAGER_Exported_Types

@@ -60,6 +60,7 @@ typedef enum
     GAP_PARAM_PRIVACY_TIMEOUT           = 0x300, //!< Timeout value for privacy
     GAP_PARAM_PRIVACY_RESOLUTION_STATE  = 0x301, //!< Resolution state
     GAP_PARAM_PRIVACY_RESOLV_LIST_SIZE  = 0x302, //!< Resolvable list size
+    GAP_PARAM_PRIVACY_EMBIGGEN = 0xffffffff
 } T_LE_PRIVACY_PARAM_TYPE;
 
 /** @brief Define the privacy state */
@@ -68,7 +69,8 @@ typedef enum
     LE_PRIVACY_RESOLUTION_DISABLED,
     LE_PRIVACY_RESOLUTION_DISABLING,
     LE_PRIVACY_RESOLUTION_ENABLING,
-    LE_PRIVACY_RESOLUTION_ENABLED
+    LE_PRIVACY_RESOLUTION_ENABLED,
+    LE_PRIVACY_RESOLUTION_EMBIGGEN = 0xFFFFFFFF
 } T_LE_PRIVACY_STATE;
 
 /** @brief LE resolution status info */

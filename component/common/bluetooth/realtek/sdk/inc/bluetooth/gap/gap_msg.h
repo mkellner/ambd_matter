@@ -126,7 +126,8 @@ typedef enum
     GAP_CONN_STATE_DISCONNECTED, //!< Disconnected.
     GAP_CONN_STATE_CONNECTING,   //!< Connecting.
     GAP_CONN_STATE_CONNECTED,    //!< Connected.
-    GAP_CONN_STATE_DISCONNECTING //!< Disconnecting.
+    GAP_CONN_STATE_DISCONNECTING, //!< Disconnecting.
+    GAP_CONN_STATE_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_CONN_STATE;
 
 /** End of Gap_Msg_Exported_Macros

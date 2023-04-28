@@ -102,6 +102,10 @@ SECTIONS
 		__fini_array_end = .;	
 		/*-----------------*/		
 
+		/* Add for Moddable support */
+		*(.flash*)
+		*(.flash.rodata*)
+
 		. = ALIGN (4);
 		__cmd_table_start__ = .;
 		KEEP(*(.cmd.table.data*))

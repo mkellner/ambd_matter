@@ -232,10 +232,11 @@ typedef enum
 #if F_BT_LE_PRIVACY_SUPPORT
     GAP_LOCAL_ADDR_LE_RAP_OR_PUBLIC    = 0x02,    /**< Controller generates the Resolvable Private Address based on the local
 IRK from the resolving list. If the resolving list contains no matching entry, then use the public address. */
-    GAP_LOCAL_ADDR_LE_RAP_OR_RAND      = 0x03     /**< Controller generates the Resolvable Private Address based on the local
+    GAP_LOCAL_ADDR_LE_RAP_OR_RAND      = 0x03,     /**< Controller generates the Resolvable Private Address based on the local
 IRK from the resolving list. If the resolving list contains no matching entry, then use the random address from the most recent successful LE_Set_Random_Address Command. */
                                          /** @} End GAP_LE_LOCAL_ADDR_TYPE_DEFINES */
 #endif
+    GAP_LOCAL_ADDR_LE_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_LOCAL_ADDR_TYPE;
 
 /** @brief Define random adress type */
@@ -243,7 +244,8 @@ typedef enum
 {
     GAP_RAND_ADDR_STATIC            = 0x00,/**<  Static random device address. */
     GAP_RAND_ADDR_NON_RESOLVABLE    = 0x01,/**<  Non resolvable random device address. */
-    GAP_RAND_ADDR_RESOLVABLE        = 0x02 /**<  Resolvable random device address. */
+    GAP_RAND_ADDR_RESOLVABLE        = 0x02, /**<  Resolvable random device address. */
+    GAP_RAND_ADDR_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_RAND_ADDR_TYPE;
 
 /** @brief Define indentify address type */
@@ -251,6 +253,7 @@ typedef enum
 {
     GAP_IDENT_ADDR_PUBLIC      = 0x00,    /*  low energy public address. */
     GAP_IDENT_ADDR_RAND        = 0x01,    /*  low energy random address. */
+    GAP_IDENT_ADDR_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_IDENT_ADDR_TYPE;
 
 #if F_BT_LE_PRIVACY_SUPPORT
@@ -261,7 +264,8 @@ typedef enum
     GAP_DIRECT_ADDR_LE_RAND                = 0x01, /**<  Random Device Address */
     GAP_DIRECT_ADDR_LE_PUBLIC_IDENT        = 0x02, /**<  Public Identity Address (Corresponds to Resolved Private Address ) */
     GAP_DIRECT_ADDR_LE_RAND_IDENT          = 0x03, /**<  Random (static) Identity Address (Corresponds to Resolved Private Address) */
-    GAP_DIRECT_ADDR_LE_RAND_UNABLE_RESOLV  = 0xFE  /**<  No address provided (anonymous advertisement) */
+    GAP_DIRECT_ADDR_LE_RAND_UNABLE_RESOLV  = 0xFE,  /**<  No address provided (anonymous advertisement) */
+    GAP_DIRECT_ADDR_LE_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_DIRECT_ADDR_TYPE;
 #endif
 
@@ -270,7 +274,8 @@ typedef enum
 {
     GAP_WHITE_LIST_OP_CLEAR = 0,    /**<  Clear white list. */
     GAP_WHITE_LIST_OP_ADD,          /**<  Add a device to the white list. */
-    GAP_WHITE_LIST_OP_REMOVE        /**<  Remove a device from the white list. */
+    GAP_WHITE_LIST_OP_REMOVE,        /**<  Remove a device from the white list. */
+    GAP_WHITE_LIST_OP_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_WHITE_LIST_OP;
 
 #if F_BT_LE_GAP_PERIPHERAL_SUPPORT
@@ -282,6 +287,7 @@ typedef enum
     GAP_ADTYPE_ADV_SCAN_IND,        //!< Scannable undirected advertisement
     GAP_ADTYPE_ADV_NONCONN_IND,     //!< Non-Connectable undirected advertisement
     GAP_ADTYPE_ADV_LDC_DIRECT_IND,  //!< Connectable low duty cycle directed advertisement
+    GAP_ADTYPE_ADV_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_ADTYPE;
 
 /** @brief  Definition of LE advertising filter policy.*/
@@ -293,6 +299,7 @@ devices that are in the White List. */
     GAP_ADV_FILTER_WHITE_LIST_CONN,/**<  Process scan requests from all devices and only connection requests from
 devices that are in the White List. */
     GAP_ADV_FILTER_WHITE_LIST_ALL,/**<  Process scan and connection requests only from devices in the White List. */
+    GAP_ADV_FILTER_WHITE_LIST_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_ADV_FILTER_POLICY;
 #endif
 
@@ -301,7 +308,8 @@ devices that are in the White List. */
 typedef enum
 {
     GAP_SCAN_MODE_PASSIVE, /**<   Passive Scanning. No scan request PDUs shall be sent. */
-    GAP_SCAN_MODE_ACTIVE   /**<   Active Scanning. Scan request PDUs may be sent. */
+    GAP_SCAN_MODE_ACTIVE,   /**<   Active Scanning. Scan request PDUs may be sent. */
+    GAP_SCAN_MODE_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_SCAN_MODE;
 
 /** @brief  Definition of LE scan filter policy.*/
@@ -325,6 +333,7 @@ does not address this device
 Note: Directed advertising packets where the initiator's address is a
 resolvable private address that cannot be resolved are also accepted. */
 #endif
+    GAP_SCAN_FILTER_ANY_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_SCAN_FILTER_POLICY;
 
 /** @brief  Definition of LE extended scan duplicate filter type.*/
@@ -333,6 +342,7 @@ typedef enum
     GAP_SCAN_FILTER_DUPLICATE_DISABLE = 0, /**<  Duplicate filtering disabled. */
     GAP_SCAN_FILTER_DUPLICATE_ENABLE = 1,  /**<  Duplicate filtering enabled. */
     GAP_SCAN_FILTER_DUPLICATE_ENABLED_RESET_FOR_EACH_PERIOD = 2,    /**<  Duplicate filtering enabled, reset for each scan period. */
+    GAP_SCAN_FILTER_DUPLICATE_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_SCAN_FILTER_DUPLICATE;
 
 /** This enum type describes adv type for T_GAP_ADV_EVT_TYPE. */
@@ -342,7 +352,8 @@ typedef enum
     GAP_ADV_EVT_TYPE_DIRECTED   = 1,    /**<  Connectable directed advertising. */
     GAP_ADV_EVT_TYPE_SCANNABLE  = 2,    /**<  Scanable undirected advertising. */
     GAP_ADV_EVT_TYPE_NON_CONNECTABLE,   /**<  Nonconnectable undirected advertising. */
-    GAP_ADV_EVT_TYPE_SCAN_RSP           /**<  scan response. */
+    GAP_ADV_EVT_TYPE_SCAN_RSP ,          /**<  scan response. */
+    GAP_ADV_EVT_TYPE_EMBIGGEN = 0xFFFFFFFF,
 } T_GAP_ADV_EVT_TYPE;
 #endif
 
@@ -354,8 +365,9 @@ typedef enum
     GAP_SEC_LEVEL_AUTHEN      = 0x05,/**< Authenticated pairing with encryption.*/
     GAP_SEC_LEVEL_SC_UNAUTHEN = 0x07,/**< Unuthenticated LE Secure Connections pairing with encryption using a 128-
 bit strength encryption key.*/
-    GAP_SEC_LEVEL_SC_AUTHEN   = 0x08/**<  Authenticated LE Secure Connections pairing with encryption using a 128-
+    GAP_SEC_LEVEL_SC_AUTHEN   = 0x08,/**<  Authenticated LE Secure Connections pairing with encryption using a 128-
 bit strength encryption key.*/
+    GAP_SEC_LEVEL_SC_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_SEC_LEVEL;
 
 #if F_BT_LE_PRIVACY_SUPPORT
@@ -364,14 +376,16 @@ typedef enum
 {
     GAP_RESOLV_LIST_OP_CLEAR = 0,    /**< Clear resolving list operation. */
     GAP_RESOLV_LIST_OP_ADD,          /**< Add a device to the resolving list operation. */
-    GAP_RESOLV_LIST_OP_REMOVE        /**< Remove a device from the resolving list operation. */
+    GAP_RESOLV_LIST_OP_REMOVE,        /**< Remove a device from the resolving list operation. */
+    GAP_RESOLV_LIST_OP_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_RESOLV_LIST_OP;
 
 /** @brief  Definition of LE privacy mode.*/
 typedef enum
 {
     GAP_PRIVACY_MODE_NETWORK = 0,    /**< Network privacy mode. */
-    GAP_PRIVACY_MODE_DEVICE          /**< Device privacy mode. */
+    GAP_PRIVACY_MODE_DEVICE,          /**< Device privacy mode. */
+    GAP_PRIVACY_MODE_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_PRIVACY_MODE;
 #endif
 
@@ -381,14 +395,16 @@ typedef enum
 {
     GAP_PHYS_1M       = 0x01,    /**< LE PHY 1M used. */
     GAP_PHYS_2M       = 0x02,    /**< LE PHY 2M used. */
-    GAP_PHYS_CODED    = 0x03     /**< LE Coded PHY  used. */
+    GAP_PHYS_CODED    = 0x03,     /**< LE Coded PHY  used. */
+    GAP_PHYS_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_PHYS_TYPE;
 
 /** @brief  Definition of LE primary advertising PHY type.*/
 typedef enum
 {
     GAP_PHYS_PRIM_ADV_1M      = 1, /**<  Primary advertisement PHY is LE 1M */
-    GAP_PHYS_PRIM_ADV_CODED   = 3  /**<  Primary advertisement PHY is LE Coded */
+    GAP_PHYS_PRIM_ADV_CODED   = 3,  /**<  Primary advertisement PHY is LE Coded */
+    GAP_PHYS_PRIM_ADV_EMBIGGEN =  0xFFFFFFFF
 } T_GAP_PHYS_PRIM_ADV_TYPE;
 
 /** @brief  Definition of LE Coded PHY preference options.*/
@@ -396,7 +412,8 @@ typedef enum
 {
     GAP_PHYS_OPTIONS_CODED_PREFER_NO   = 0,/**< Host has no preferred coding when transmitting on the LE Coded PHY */
     GAP_PHYS_OPTIONS_CODED_PREFER_S2   = 1,/**< Host prefers that S=2 coding be used when transmitting on the LE Coded PHY */
-    GAP_PHYS_OPTIONS_CODED_PREFER_S8   = 2 /**< Host prefers that S=8 coding be used when transmitting on the LE Coded PHY */
+    GAP_PHYS_OPTIONS_CODED_PREFER_S8   = 2, /**< Host prefers that S=8 coding be used when transmitting on the LE Coded PHY */
+    GAP_PHYS_OPTIONS_CODED_PREFER_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_PHYS_OPTIONS;
 #endif
 

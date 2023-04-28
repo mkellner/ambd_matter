@@ -73,7 +73,7 @@ extern uint32_t SystemCoreClock;
 #define configUSE_PREEMPTION							1
 #define configUSE_TIME_SLICING							1
 #define configMAX_PRIORITIES							( 11 )
-#define configIDLE_SHOULD_YIELD							0
+#define configIDLE_SHOULD_YIELD							1
 #define configUSE_16_BIT_TICKS							0 /* Only for 8 and 16-bit hardware. */
 
 /* Constants that describe the hardware and memory usage. */
@@ -82,14 +82,14 @@ extern uint32_t SystemCoreClock;
 #define configMINIMAL_SECURE_STACK_SIZE					( 1024 )
 #define configMAX_TASK_NAME_LEN							( 10 )
 #ifdef CONFIG_WIFI_EN
-#define configTOTAL_HEAP_SIZE						( ( size_t ) ( 200 * 1024 ) ) //default
+#define configTOTAL_HEAP_SIZE						( ( size_t ) ( 280 * 1024 ) ) //default
 #if (defined CONFIG_HIGH_TP_TEST)
 	#define configTOTAL_HEAP_SIZE					( ( size_t ) ( 100 * 1024 ) )		
 #endif
 #else
 #define configTOTAL_HEAP_SIZE						( ( size_t ) ( 40 * 1024 ) )
 #endif
-#define  CONFIG_DYNAMIC_HEAP_SIZE                       0
+#define  CONFIG_DYNAMIC_HEAP_SIZE                       1
 
 #define secureconfigTOTAL_SRAM_HEAP_SIZE			( ( ( size_t ) ( 6 * 1024 ) ) )
 #define secureconfigTOTAL_PSRAM_HEAP_SIZE			( ( ( size_t ) ( 128 * 1024 ) ) )
@@ -104,7 +104,7 @@ extern uint32_t SystemCoreClock;
 #define configUSE_RECURSIVE_MUTEXES						1
 #define configUSE_QUEUE_SETS							1
 #define configUSE_TASK_NOTIFICATIONS					1
-#define configUSE_TRACE_FACILITY						1
+#define configUSE_TRACE_FACILITY						0
 
 /* Constants that define which hook (callback) functions should be used. */
 #define configUSE_IDLE_HOOK								0
@@ -137,7 +137,7 @@ extern uint32_t SystemCoreClock;
 #define INCLUDE_uxTaskGetStackHighWaterMark				0
 #define INCLUDE_uxTaskGetStackSize      				1
 #define INCLUDE_uxTaskGetFreeStackSize    				1
-#define INCLUDE_xTaskGetIdleTaskHandle					0
+#define INCLUDE_xTaskGetIdleTaskHandle					1
 #define INCLUDE_eTaskGetState							1
 #define INCLUDE_xTaskResumeFromISR						0
 #define INCLUDE_xTaskGetCurrentTaskHandle				1

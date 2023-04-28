@@ -119,6 +119,7 @@ typedef enum
     LE_KEY_AUTHEN                = 0x05, /**< SSP generated link key with MITM protection. */
     LE_KEY_UNAUTHEN_P256         = 0x07, /**< Security Connections generated link key without MITM protection. */
     LE_KEY_AUTHEN_P256           = 0x08, /**< Security Connections link key with MITM protection. */
+    LE_KEY_AUTHEN_EMBIGGEN = 0xFFFFFFFF
 } T_LE_KEY_TYPE;
 
 /** @brief LE key entry */

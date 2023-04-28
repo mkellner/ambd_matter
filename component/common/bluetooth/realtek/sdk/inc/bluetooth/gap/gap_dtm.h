@@ -38,6 +38,7 @@ typedef enum
 {
     GAP_DTM_MODULATION_INDEX_STANDARD   = 0x00,    /**< Assume transmitter will have a standard modulation index. */
     GAP_DTM_MODULATION_INDEX_STABLE     = 0x01,    /**< Assume transmitter will have a stable modulation index. */
+    GAP_DTM_MODULATION_INDEX_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_DTM_MODULATION_INDEX_TYPE;
 
 typedef enum
@@ -49,7 +50,8 @@ typedef enum
     GAP_DTM_PACKET_PAYLOAD_ALL1 = 0x04,     /**< Repeated '11111111' (in transmission order) sequence. . */
     GAP_DTM_PACKET_PAYLOAD_ALL0 = 0x05,     /**< Repeated '00000000' (in transmission order) sequence. . */
     GAP_DTM_PACKET_PAYLOAD_0011 = 0x06,     /**< Repeated '00001111' (in transmission order) sequence. . */
-    GAP_DTM_PACKET_PAYLOAD_01 = 0x07        /**< Repeated '01010101' (in transmission order) sequence. . */
+    GAP_DTM_PACKET_PAYLOAD_01 = 0x07,        /**< Repeated '01010101' (in transmission order) sequence. . */
+    GAP_DTM_PACKET_PAYLOAD_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_DTM_PACKET_PAYLOAD_TYPE;
 
 typedef enum
@@ -58,6 +60,7 @@ typedef enum
     GAP_DTM_PHYS_2M       = 0x02,    /**< LE PHY 2M used. */
     GAP_DTM_PHYS_CODED_S8 = 0x03,    /**< LE Coded PHY with S=8 data coding. */
     GAP_DTM_PHYS_CODED_S2 = 0x04,    /**< LE Coded PHY with S=2 data coding. */
+    GAP_DTM_PHYS_EMBIGGEN = 0xFFFFFFFF
 } T_GAP_DTM_PHYS_TYPE;
 
 /** End of GAP_LE_DTM_Exported_Types

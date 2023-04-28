@@ -71,6 +71,7 @@ typedef enum
     GCS_BY_UUID_CHAR_DISCOV,    //!<Response type for gcs_by_uuid_char_discovery
     GCS_BY_UUID128_CHAR_DISCOV, //!<Response type for gcs_by_uuid128_char_discovery
     GCS_ALL_CHAR_DESC_DISCOV,   //!<Response type for gcs_all_char_descriptor_discovery
+    EMBIGGEN1 = 0xFFFFFFFF
 } T_GCS_DISCOV_TYPE;
 
 /** @brief  Discovery result element.*/
@@ -134,7 +135,8 @@ typedef enum
     GCS_CLIENT_CB_TYPE_READ_RESULT,         //!< Read request's result data, responsed from server.
     GCS_CLIENT_CB_TYPE_WRITE_RESULT,
     GCS_CLIENT_CB_TYPE_NOTIF_IND,
-    GCS_CLIENT_CB_TYPE_INVALID              //!< Invalid callback type, no practical usage.
+    GCS_CLIENT_CB_TYPE_INVALID,              //!< Invalid callback type, no practical usage.
+    GCS_CLIENT_CB_EMBIGGEN=0xFFFFFFFF
 } T_GCS_CLIENT_CB_TYPE;
 
 /** @brief GCS client callback content */
