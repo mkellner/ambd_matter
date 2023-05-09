@@ -167,6 +167,11 @@ ifeq ($(CONFIG_EMWIN_EN),y)
 LINK_APP_LIB += $(BASEDIR)/component/common/ui/emwin/emWinLibrary/lib/rtl8721d/lib_emwin.a
 endif
 
+CONFIG_MODDABLE := y
+ifeq ($(CONFIG_MODDABLE),y)
+LINK_APP_LIB += $(ROOTDIR)/lib/application/xs_ambd.a
+endif
+
 rom: build_target_folder copy_ld_rom check_toolchain build_info.h make_subdirs_rom package_prebuilt_rom_objs rom_linker 
 rom_ns: build_target_folder copy_ld_rom_ns check_toolchain build_info.h make_subdirs_rom_ns package_prebuilt_rom_objs rom_linker_ns 
 image2_ns: build_target_folder copy_ld_img2 check_toolchain build_info.h make_subdirs linker_image2_ns 

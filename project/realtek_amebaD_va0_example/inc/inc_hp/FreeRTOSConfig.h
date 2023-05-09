@@ -73,7 +73,7 @@ extern uint32_t SystemCoreClock;
 #define configUSE_PREEMPTION							1
 #define configUSE_TIME_SLICING							1
 #define configMAX_PRIORITIES							( 11 )
-#define configIDLE_SHOULD_YIELD							1
+#define configIDLE_SHOULD_YIELD							0
 #define configUSE_16_BIT_TICKS							0 /* Only for 8 and 16-bit hardware. */
 
 /* Constants that describe the hardware and memory usage. */
@@ -82,7 +82,7 @@ extern uint32_t SystemCoreClock;
 #define configMINIMAL_SECURE_STACK_SIZE					( 1024 )
 #define configMAX_TASK_NAME_LEN							( 10 )
 #ifdef CONFIG_WIFI_EN
-#define configTOTAL_HEAP_SIZE						( ( size_t ) ( 280 * 1024 ) ) //default
+#define configTOTAL_HEAP_SIZE						( ( size_t ) ( (280 - 56) * 1024 ) ) //default
 #if (defined CONFIG_HIGH_TP_TEST)
 	#define configTOTAL_HEAP_SIZE					( ( size_t ) ( 100 * 1024 ) )		
 #endif
@@ -104,7 +104,7 @@ extern uint32_t SystemCoreClock;
 #define configUSE_RECURSIVE_MUTEXES						1
 #define configUSE_QUEUE_SETS							1
 #define configUSE_TASK_NOTIFICATIONS					1
-#define configUSE_TRACE_FACILITY						0
+#define configUSE_TRACE_FACILITY						1
 
 /* Constants that define which hook (callback) functions should be used. */
 #define configUSE_IDLE_HOOK								0

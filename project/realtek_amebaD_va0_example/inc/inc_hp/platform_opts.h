@@ -14,10 +14,12 @@
 /*For MP mode setting*/
 //#define SUPPORT_MP_MODE		1
 
+#define USE_PSRAM 1
+
 /**
  * For AT cmd Log service configurations
  */
-#define SUPPORT_LOG_SERVICE			0
+#define SUPPORT_LOG_SERVICE			1
 #define SUPPORT_INTERACTIVE_MODE	0
 
 #if SUPPORT_LOG_SERVICE

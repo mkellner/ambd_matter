@@ -1,3 +1,4 @@
+#include "gpio_api.h"
 
 #include "ameba_soc.h"
 #include "main.h"
@@ -218,6 +219,23 @@ int main(void)
 		app_dslp_wake();
 	}
 
+gpio_t led_b, led_g;
+gpio_init(&led_b, 9);
+gpio_dir(&led_b, PIN_OUTPUT);
+gpio_mode(&led_b, PullNone);
+gpio_init(&led_g, 10);
+gpio_dir(&led_g, PIN_OUTPUT);
+gpio_mode(&led_g, PullNone);
+int i, j, k;
+for (i = 0; i < 100; i++) {
+    gpio_write(&led_g, i & 1);
+    for (j=0; j < 10000; j++) {
+        gpio_write(&led_b, j & 1);
+        for (k=0; k < 10000; k++) {
+        }
+    }
+}
+
 #ifdef CONFIG_FTL_ENABLED
 	app_ftl_init();
 #endif
@@ -255,7 +273,16 @@ int main(void)
 	
 	app_init_debug();
 
+DBG_8195A("***************************************\n");
+DBG_8195A("***************        ****************\n");
+DBG_8195A("**************  xs_start ***************\n");
+DBG_8195A("**************          ***************\n");
+DBG_8195A("***************************************\n");
+
+#if 1
 	xs_start();
+#endif
+
 
 	//DBG_8195A("M4U:%d \n", RTIM_GetCount(TIMM05));
 	/* Enable Schedule, Start Kernel */
